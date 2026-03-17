@@ -3,8 +3,9 @@ package com.hospital.model;
 /**
  * Doctor class representing a medical professional in the hospital system.
  * Extends Person class and adds specialization information.
+ * Implements MedicalService interface to provide medical checkup functionality.
  */
-public class Doctor extends Person {
+public class Doctor extends Person implements MedicalService {
     private String specialization;
     
     /**
@@ -32,6 +33,15 @@ public class Doctor extends Person {
      */
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
+    }
+    
+    /**
+     * Performs a medical checkup as required by MedicalService interface.
+     * Prints a message indicating the doctor is performing a checkup.
+     */
+    @Override
+    public void performCheckup() {
+        System.out.println("Doctor " + getName() + " is performing a checkup on specialization " + specialization);
     }
     
     /**
