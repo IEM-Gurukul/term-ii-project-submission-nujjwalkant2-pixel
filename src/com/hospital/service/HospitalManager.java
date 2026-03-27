@@ -3,6 +3,7 @@ package com.hospital.service;
 import com.hospital.model.Doctor;
 import com.hospital.model.Patient;
 import com.hospital.model.Appointment;
+import com.hospital.exception.InvalidIDException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +43,21 @@ public class HospitalManager {
     public void addDoctor(Doctor doctor) {
         doctors.add(doctor);
         System.out.println("Doctor " + doctor.getName() + " added successfully.");
+    }
+    
+    /**
+     * Finds a patient by their ID
+     * @param id The ID of the patient to search for
+     * @return Patient object if found
+     * @throws InvalidIDException if patient with given ID is not found
+     */
+    public Patient findPatientById(String id) throws InvalidIDException {
+        for (Patient patient : patients) {
+            if (patient.getId().equals(id)) {
+                return patient;
+            }
+        }
+        throw new InvalidIDException("Patient with ID " + id + " not found.");
     }
     
     /**
@@ -117,5 +133,35 @@ public class HospitalManager {
             }
         }
         System.out.println("========================");
+    }
+    
+    /**
+     * Test method to demonstrate findPatientById with exception handling
+     * This method shows how the exception handling works as required by the task
+     */
+    public static void testFindPatientById() {
+        HospitalManager manager = new HospitalManager();
+        
+        // Add some test patients
+        manager.addPatient(new Patient("P001", "John Doe", "Fever"));
+        manager.addPatient(new Patient("P002", "Jane Smith", "Headache"));
+        
+        // Test successful search
+        try {
+            Patient foundPatient = manager.findPatientById("P001");
+            System.out.println("Found patient: " + foundPatient.getName());
+            foundPatient.displayInfo();
+        } catch (InvalidIDException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        
+        // Test unsuccessful search (should throw exception)
+        try {
+            Patient notFoundPatient = manager.findPatientById("P999");
+            System.out.println("Found patient: " + notFoundPatient.getName());
+        } catch (InvalidIDException e) {
+            System.out.println("Error: " + e.getMessage());
+            System.out.println("Exception handling working correctly!");
+        }
     }
 }
