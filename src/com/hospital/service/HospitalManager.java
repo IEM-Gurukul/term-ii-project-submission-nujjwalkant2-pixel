@@ -9,6 +9,9 @@ import java.util.List;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
 
 /**
  * HospitalManager class manages all hospital data and operations.
@@ -76,6 +79,35 @@ public class HospitalManager {
                 writer.newLine();
             }
             System.out.println("Patients saved successfully to patients.txt");
+        }
+    }
+    
+    /**
+     * Loads patients from patients.txt file
+     * Reads the file line by line, splits by commas, and creates Patient objects
+     * @throws IOException if there is an error reading the file
+     */
+    public void loadPatientsFromFile() throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader("patients.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Split the line by commas to get patient data
+                String[] patientData = line.split(",");
+                
+                // Ensure we have exactly 3 parts: id, name, ailment
+                if (patientData.length == 3) {
+                    String id = patientData[0].trim();
+                    String name = patientData[1].trim();
+                    String ailment = patientData[2].trim();
+                    
+                    // Create new Patient object and add to list
+                    Patient patient = new Patient(id, name, ailment);
+                    patients.add(patient);
+                }
+            }
+            System.out.println("Patients loaded successfully from patients.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("patients.txt file not found. Starting with empty patient list.");
         }
     }
     
