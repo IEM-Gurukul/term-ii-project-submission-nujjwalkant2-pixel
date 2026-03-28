@@ -6,6 +6,9 @@ import com.hospital.model.Appointment;
 import com.hospital.exception.InvalidIDException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * HospitalManager class manages all hospital data and operations.
@@ -58,6 +61,22 @@ public class HospitalManager {
             }
         }
         throw new InvalidIDException("Patient with ID " + id + " not found.");
+    }
+    
+    /**
+     * Saves all patients to a file named patients.txt
+     * Each patient is stored as a comma-separated line: id,name,ailment
+     * @throws IOException if there is an error writing to the file
+     */
+    public void savePatientsToFile() throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("patients.txt"))) {
+            for (Patient patient : patients) {
+                String patientData = patient.getId() + "," + patient.getName() + "," + patient.getAilment();
+                writer.write(patientData);
+                writer.newLine();
+            }
+            System.out.println("Patients saved successfully to patients.txt");
+        }
     }
     
     /**
