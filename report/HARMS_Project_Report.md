@@ -1,10 +1,10 @@
 # Hospital Appointment & Record Management System (HARMS)
 ## Final Project Report
 
-**Student:** Nujjwal Kant  
+**Student:** Ujjwal Kant  
 **Course:** PCCCS495 - Term II  
 **Submission Date:** March 2025  
-**Instructor:** [Instructor Name]
+
 
 ---
 
@@ -28,7 +28,7 @@ HARMS is a menu-driven console application that enables healthcare facilities to
 
 ---
 
-## Technical Implementation
+
 
 ### Architecture
 The system follows a layered architecture with clear separation of concerns:
@@ -233,12 +233,3 @@ The Hospital Appointment & Record Management System (HARMS) successfully meets a
 - Created comprehensive user interface systems
 - Applied software engineering best practices
 
----
-
-**Project Status:** ✅ COMPLETED SUCCESSFULLY  
-**Grade Expectation:** A - Excellent Implementation  
-**Date:** March 29, 2025
-
----
-
-*This report documents the complete development lifecycle of the HARMS project, from initial concept through final implementation and testing.*
